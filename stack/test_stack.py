@@ -1,12 +1,13 @@
 import unittest
-from stack import Stack
+from stack import LinkedListStack
 
 class QueueTests(unittest.TestCase):
     def setUp(self):
-        self.stack = Stack()
+        self.stack = LinkedListStack()
 
     def test_len_returns_0_for_empty_stack(self):
         self.assertEqual(len(self.stack), 0)
+        self.asserEqual(len(self.stack), 0)
 
     def test_len_returns_correct_length_after_push(self):
         self.assertEqual(len(self.stack), 0)
@@ -23,7 +24,12 @@ class QueueTests(unittest.TestCase):
         self.stack.push(18)
         self.assertEqual(len(self.stack), 9)
 
+
     def test_empty_pop(self):
+        self.assertIsNone(self.stack.pop())
+        self.assertEqual(len(self.stack), 0)
+
+        # Linked list
         self.assertIsNone(self.stack.pop())
         self.assertEqual(len(self.stack), 0)
 
