@@ -7,7 +7,7 @@ class ListNode:
         self.prev = prev
         self.value = value
         self.next = next
-            
+
 """
 Our doubly-linked list class. It holds references to 
 the list's head and tail nodes.
@@ -55,7 +55,7 @@ class DoublyLinkedList:
             new_head.prev = None
             self.head = new_head
         else:
-            self.head, self.taile = None, None
+            self.head, self.tail = None, None
         self.length -= 1
         return old_head.value
 
@@ -66,12 +66,12 @@ class DoublyLinkedList:
     """
     def add_to_tail(self, value):
         if self.tail:
-            new_tail = ListNoe(value, self.tail, None)
+            new_tail = ListNode(value, self.tail, None)
             self.tail.next = new_tail
             self.tail = new_tail
-            self.length += 1
         else:
             self.add_to_head(value)
+        self.length += 1
     """
     Removes the List's current tail node, making the 
     current tail's previous node the new tail of the List.
@@ -92,13 +92,12 @@ class DoublyLinkedList:
     List and inserts it as the new head node of the List.
     """
     def move_to_front(self, node):
-         self.delete(node)
+        self.delete(node)
         temp = self.head
         self.head = node
         self.head.next = temp
         self.head.prev = None
         temp.prev = self.head
-        self.length += 1
     """
     Removes the input node from its current spot in the 
     List and inserts it as the new tail node of the List.
@@ -109,7 +108,6 @@ class DoublyLinkedList:
         node.prev = self.tail
         node.next = None
         self.tail = node
-        self.length += 1
     """
     Deletes the input node from the List, preserving the 
     order of the other elements of the List.
@@ -117,7 +115,7 @@ class DoublyLinkedList:
     def delete(self, node):
         if node.prev == None:
             self.remove_from_head()
-        elif node.next ==None:
+        elif node.next == None:
             self.remove_from_tail()
         else:
             prev, next = node.prev, node.next
@@ -136,4 +134,31 @@ class DoublyLinkedList:
                 max_val = node.value
             node = node.next
         return max_val
+
+# ll = DoublyLinkedList()
+
+# for n in [ 2, 3, 5, 9 , 1]:
+#     ll.add_to_tail(n)
+
+# print(ll)
+
+# ll.remove_from_head()
+
+# print(ll)
+
+# x = ll.remove_from_tail()
+
+# print(f"removed val: <{x}> ", ll)
+
+# x = ll.remove_from_head()
+
+# print(f"removed val: <{x}> ", ll)
+
+# ll.add_to_head(2)
+
+# print(ll)
+
+# ll.delete(ll.head.next)
+
+# print(len(ll))
 
