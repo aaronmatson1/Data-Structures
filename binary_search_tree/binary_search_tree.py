@@ -17,32 +17,86 @@ class BSTNode:
 
     # Insert the given value into the tree
     def insert(self, value):
-        pass
+        if value < self.value:
+            if not self.left:
+                self.left = BSTNode(value)
+            else:
+                self.left.insert(value)
+        else:
+            if not self.right:
+                self.right = BTSNode(value)
+            else:
+                self.right.insert(value)
 
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        pass
+        node = self
+
+        def search(node, target):
+            if node == None:
+                return False
+            if node.value == target:
+                return True
+            elif target < node.value:
+                return search(node.left, target)
+            else:
+                return search(node.right, target)
+        return search(node, target)
 
     # Return the maximum value found in the tree
     def get_max(self):
-        pass
+        node = self
+        def right_traverse(node):
+            if node.right == None:
+                return node.value
+            return right_traverse(node.right)
+        return right_traverse(node)
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        pass
+        node = self
+        self.fn = fn
+        def traverse(node):
+            if node == None:
+                return
+            self.fn(node.value)
+            traverse(node.left)
+            traverse(node.right)
+        traverse(node)
 
     # Part 2 -----------------------
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self):
-        pass
+        node = self
+        def traverse(node):
+            if node == None:
+                return
+            traverse(node.left)
+            print(node.value)  
+            traverse(node.right)
+
+        traverse(node)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self):
-        pass
+        node = self
+
+        prev = node
+        def traverse(node, prev):
+            while node != None:
+                print(node.value)
+                if node.left != None:
+                    prev = node
+                    node = node.left
+                else:
+                    node = prev.right
+                    prev = node
+        traverse(node, prev)
+        traverse(node.right, prev)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
